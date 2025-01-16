@@ -1,6 +1,6 @@
 import SchedulingService from "../src/SchedulingService";
 
-test("Deve agendar um corte de cabelo", async () => {
+test("Deve agendar um corte de", async () => {
     const schedulingService = new SchedulingService();
     const date = new Date("2025-02-13T10:00:00");
     const output = await schedulingService.schedule(date);
@@ -9,3 +9,5 @@ test("Deve agendar um corte de cabelo", async () => {
         success: true
     });
 });
+
+test("Deve lançar um erro quando a data for fora do horário de expediente")
