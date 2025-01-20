@@ -10,4 +10,9 @@ test("Deve agendar um corte de", async () => {
     });
 });
 
-test("Deve lançar um erro quando a data for fora do horário de expediente")
+test("Deve lançar um erro quando a data for fora do horário de expediente", async() => {
+    const schedulingService = new SchedulingService();
+    const date = new Date("202-02-13T22:00:00");
+    await expect(() => schedulingService.execute(date)).rejects.toThrow(new Error("Outside business hours"))
+
+})
