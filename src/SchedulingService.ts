@@ -1,4 +1,5 @@
 import SchedulingDate from "./SchedulingDate"
+import SchedulingHash from "./SchedulingHash";
 import SchedulingHour from "./SchedulingHour";
 
 export default class SchedulingService {
@@ -7,7 +8,7 @@ export default class SchedulingService {
     async schedule(date: Date) {
         const formatedDate = new SchedulingDate(date).value;
         const hours = new SchedulingHour(date).value;
-        const hash = `${formatedDate}T${hours}`
+        const hash = new SchedulingHash(formatedDate, hours).value;
         this.calendar[hash] = {
             date: formatedDate,
             time: hours,
