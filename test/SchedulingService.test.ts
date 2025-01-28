@@ -1,6 +1,6 @@
-import SchedulingService from "../src/SchedulingService";
+import SchedulingService from "../src/application/SchedulingService";
 
-test("Deve agendar um corte de", async () => {
+test("Deve agendar um corte de cabelo", async () => {
     const schedulingService = new SchedulingService();
     const date = new Date("2025-02-13T10:00:00");
     const output = await schedulingService.schedule(date);
@@ -13,6 +13,13 @@ test("Deve agendar um corte de", async () => {
 test("Deve lançar um erro quando a data for fora do horário de expediente", async() => {
     const schedulingService = new SchedulingService();
     const date = new Date("202-02-13T22:00:00");
-    await expect(() => schedulingService.execute(date)).rejects.toThrow(new Error("Outside business hours"))
-
+    await expect(() => schedulingService.schedule(date)).rejects.toThrow(new Error("Outside business hours"))
 })
+
+test("Deve lançar um erro quando a data já estiver agendada", async() => {
+    const schedulingService = new SchedulingService();
+    const dateScheduled = new Date("2025-02-13T10:00:00");
+    await schedulingService.schedule(dateScheduled);
+    const newScheduledDate = new Date("2025-02-13T10:00:00");
+    await expect(() => schedulingService.schedule(newScheduledDate)).rejects.toThrow(new Error("Date already scheduled"))
+});
