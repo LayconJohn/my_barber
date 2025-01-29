@@ -9,16 +9,20 @@ export default class SchedulingService {
         const formatedDate = new SchedulingDate(date).value;
         const hours = new SchedulingHour(date).value;
         const hash = new SchedulingHash(formatedDate, hours).value;
+        const calendarSchedule = this.calendar[hash]
         
+        // if(!calendar || !calendar?.avaible) throw new Error(`Date already scheduled by ${this.calendar[hash].clientName}`)
+        
+        // calendar.date =formatedDate;
+        // calendar.time = hours;
+        // calendar.clientName = clientName;
+        // calendar.avaiable = false; 
         this.calendar[hash] = {
             date: formatedDate,
             time: hours,
             clientName,
             avaiable: false
         }
-        return {
-            message: `Corte agendado para ${this.calendar[hash].date} às ${this.calendar[hash].time} para o cliente ${this.calendar[hash].clientName}`,
-            success: true
-        }
+        return this.calendar[hash];
     }
 }

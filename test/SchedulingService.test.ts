@@ -5,11 +5,14 @@ test("Deve agendar um corte de cabelo", async () => {
     const schedulingService = new SchedulingService();
     const baberClient = new BarberClient("Fulano");
     const date = new Date("2025-02-13T10:00:00");
+    const expectedOutput = {
+        date: "13/02/2025",
+        time: "10:00",
+        clientName: "Fulano",
+        avaiable: false
+    }
     const output = await schedulingService.schedule(date, baberClient.getName());
-    expect(output).toStrictEqual({
-        message: "Corte agendado para 13/02/2025 às 10:00 para o cliente Fulano",
-        success: true
-    });
+    expect(output).toStrictEqual(expectedOutput);
 });
 
 test("Deve lançar um erro quando a data for fora do horário de expediente", async() => {
