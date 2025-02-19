@@ -12,6 +12,7 @@ test("Deve agendar um corte de cabelo", async () => {
         avaiable: false
     }
     const output = await schedulingService.schedule(date, baberClient.getName());
+    
     expect(output).toStrictEqual(expectedOutput);
 });
 
@@ -29,5 +30,5 @@ test("Deve lançar um erro quando a data já estiver agendada", async() => {
     await schedulingService.schedule(dateScheduled, baberClient.getName());
     const newScheduledDate = new Date("2025-02-13T10:00:00");
     const newBarberClient = new BarberClient("Ciclano");
-    await expect(() => schedulingService.schedule(newScheduledDate, newBarberClient.getName())).rejects.toThrow(new Error("Date already scheduled by Fulano"))
+    await expect(() => schedulingService.schedule(newScheduledDate, newBarberClient.getName())).rejects.toThrow(new Error("Date already scheduled"))
 });

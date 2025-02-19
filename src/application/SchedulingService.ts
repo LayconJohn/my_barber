@@ -10,13 +10,9 @@ export default class SchedulingService {
         const hours = new SchedulingHour(date).value;
         const hash = new SchedulingHash(formatedDate, hours).value;
         const calendarSchedule = this.calendar[hash]
+
+        if(calendarSchedule) throw new Error(`Date already scheduled`)
         
-        // if(!calendar || !calendar?.avaible) throw new Error(`Date already scheduled by ${this.calendar[hash].clientName}`)
-        
-        // calendar.date =formatedDate;
-        // calendar.time = hours;
-        // calendar.clientName = clientName;
-        // calendar.avaiable = false; 
         this.calendar[hash] = {
             date: formatedDate,
             time: hours,
