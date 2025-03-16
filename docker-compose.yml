@@ -9,17 +9,6 @@ services:
       - .env
     volumes:
       - postgres-volume:/var/lib/postgresql/data
-  
-  app:
-    container_name: app
-    build: ./
-    restart: always
-    ports:
-      - 3000:3000
-    depends_on:
-      - postgres
-    env_file:
-      - .env
 
 volumes:
   postgres-volume:
