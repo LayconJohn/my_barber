@@ -4,6 +4,7 @@ CREATE SCHEMA IF NOT EXISTS my_barber;
 -- Criando a tabela user
 CREATE TABLE IF NOT EXISTS my_barber.user (
     user_id UUID PRIMARY KEY,
+    hash text unique,
     email TEXT,
     phone TEXT,
     name TEXT
