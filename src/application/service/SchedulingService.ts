@@ -1,6 +1,7 @@
-import SchedulingDate from "../domain/SchedulingDate"
-import SchedulingHash from "../domain/SchedulingHash";
-import SchedulingHour from "../domain/SchedulingHour";
+import SchedulingDate from "../../domain/SchedulingDate";
+import SchedulingHash from "../../domain/SchedulingHash";
+import SchedulingHour from "../../domain/SchedulingHour";
+
 
 export default class SchedulingService {
     calendar: any = {}
