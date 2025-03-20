@@ -1,4 +1,4 @@
-export interface CalendarDAO {
+export default interface CalendarDAO {
     get(hash: string): Promise<any>
     save(calendarDTO: SaveInput): Promise<void>
     update(calendarDTO: UpdateInput): Promise<void>
@@ -8,7 +8,7 @@ type SaveInput = {
     user_id: string,
     date: string,
     time: string,
-    start_Date: string
+    start_date: string
 }
 
 type UpdateInput = {
