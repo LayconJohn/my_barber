@@ -1,7 +1,5 @@
--- Criando o schema (se não existir)
 CREATE SCHEMA IF NOT EXISTS my_barber;
 
--- Criando a tabela user
 CREATE TABLE IF NOT EXISTS my_barber.user (
     user_id UUID PRIMARY KEY,
     hash text unique,
@@ -10,7 +8,6 @@ CREATE TABLE IF NOT EXISTS my_barber.user (
     name TEXT
 );
 
--- Criando a tabela calendar
 CREATE TABLE IF NOT EXISTS my_barber.calendar (
     calendar_id UUID PRIMARY KEY,
     user_id UUID NOT NULL REFERENCES my_barber.user (user_id),
