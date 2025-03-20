@@ -1,25 +1,30 @@
 import SchedulingDate from "../../domain/SchedulingDate";
 import SchedulingHash from "../../domain/SchedulingHash";
 import SchedulingHour from "../../domain/SchedulingHour";
+import CalendarDAO from "../DAO/CalendarDAO";
 
 
 export default class SchedulingService {
-    calendar: any = {}
 
-    async schedule(date: Date, clientName: string) {
+    constructor(
+        private readonly calendarDAO: CalendarDAO
+    ) {}    
+
+    async schedule(date: Date, user_id: string) {
         const formatedDate = new SchedulingDate(date).value;
         const hours = new SchedulingHour(date).value;
         const hash = new SchedulingHash(formatedDate, hours).value;
-        const calendarSchedule = this.calendar[hash]
+        const calendarSchedule = await this.calendarDAO.get(hash)
 
         if(calendarSchedule) throw new Error(`Date already scheduled`)
         
-        this.calendar[hash] = {
+        const calendar = {
+            user_id,
             date: formatedDate,
             time: hours,
-            clientName,
-            avaiable: false
+            start_date: date.toString()
         }
-        return this.calendar[hash];
+
+        await this.calendarDAO.save(calendar)
     }
 }
