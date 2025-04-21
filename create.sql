@@ -2,7 +2,6 @@ CREATE SCHEMA IF NOT EXISTS my_barber;
 
 CREATE TABLE IF NOT EXISTS my_barber.user (
     user_id UUID PRIMARY KEY,
-    hash text unique,
     email TEXT,
     phone TEXT,
     name TEXT
@@ -11,6 +10,7 @@ CREATE TABLE IF NOT EXISTS my_barber.user (
 CREATE TABLE IF NOT EXISTS my_barber.calendar (
     calendar_id UUID PRIMARY KEY,
     user_id UUID NOT NULL REFERENCES my_barber.user (user_id),
+    hash text unique,
     date TEXT,
     time TEXT,
     start_date TIMESTAMP,
